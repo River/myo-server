@@ -23,11 +23,13 @@ http.createServer(function (req, res) {
   if (url == '/read') {
     fs.readFile(stateFile, function(err, data) {
       fs.writeFile(stateFile, '0');
+      console.log("Read " + data + " and reset");
       res.end(data);
     });
   } else if (url.substring(0,6) == '/write') {
     var writeString = url.substring(7);
     fs.writeFile(stateFile, writeString);
+    console.log("Write " + writeString);
     res.end(writeString);
   } else {
     res.end('Not found');
